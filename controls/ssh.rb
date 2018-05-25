@@ -1,8 +1,6 @@
 title 'ssh'
 
-include_controls 'ssh-baseline' do 
-  skip_control 'ssh_spec'
-end
+include_controls 'ssh-baseline'
 
 control 'sshd version' do
   impact 1.0
@@ -19,5 +17,23 @@ control 'sshd Permit Root Login' do
   desc 'Root login should NOT be permitted'
   describe sshd_config do
     its('PermitRootLogin') { should cmp 'no' }
+  end
+end
+
+control 'AWS environment variables' do
+  impact 1.0
+  title 'SSHD Configuration AcceptEnv should not contain AWS_*'
+  desc 'AWS environment variables should not be forwarded to admin servers' 
+  describe sshd_config do 
+    its('AcceptEnv') { should_not include 'AWS_*' }
+  end
+end
+
+control 'OpenStack environment variables' do
+  impact 1.0
+  title 'SSHD Configuration AcceptEnv should not contain OS_*'
+  desc 'OpenStack environment variables should not be forwarded to admin servers' 
+  describe sshd_config do 
+    its('AcceptEnv') { should_not include 'OS_*' }
   end
 end
