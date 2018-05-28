@@ -1,6 +1,12 @@
 title 'ssh'
 
-include_controls 'ssh-baseline'
+include_controls 'ssh-baseline' do 
+  skip_control 'ssh-10'
+  skip_control 'ssh-11'
+  skip_control 'ssh-14'
+  skip_control 'ssh-15'
+  skip_control 'sshd-40'
+end
 
 control 'sshd version' do
   impact 1.0
