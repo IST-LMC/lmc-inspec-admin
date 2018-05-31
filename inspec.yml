@@ -11,5 +11,7 @@ supports:
  - os-family: debian
 
 depends: 
+ - name: linux-baseline
+   supermarket: dev-sec/linux-baseline
  - name: ssh-baseline
    supermarket: dev-sec/ssh-baseline
